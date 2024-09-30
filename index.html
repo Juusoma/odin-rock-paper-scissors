@@ -3,8 +3,38 @@
     <head>  
         <meta charset="utf-8">
         <title>Rock Paper Scissors</title>
+        <script defer src="main.js"></script>
+        <style>
+            body{
+                background-color: darkslateblue;
+                color: white;
+            }
+
+            .game-container{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                gap: 32px;
+            }
+
+            #player-buttons{
+                display: flex;
+                flex-direction: row;
+            }
+        </style>
     </head>
     <body>
-        <script src="main.js"></script>
+        <div class="game-container">
+            <div id="player-buttons">
+                <button id="button-rock">Rock</button>
+                <button id="button-paper">Paper</button>
+                <button id="button-scissors">Scissors</button>
+            </div>
+            <div id="text-round">
+                You lost
+            </div>
+        </div>
     </body>
 </html>
