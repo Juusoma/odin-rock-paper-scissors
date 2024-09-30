@@ -12,21 +12,6 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let choice = prompt(`Choose: "Rock", "Paper", or "Scissors"`)
-
-    return choice.toLowerCase();
-}
-
-function validateChoice(choice)
-{
-    if(choice !== "rock" && choice !== "paper" && choice !== "scissors"){
-        return false;
-    }
-
-    return true;
-}
-
 function playRound(humanChoice, computerChoice){
     let result = 0;
 
