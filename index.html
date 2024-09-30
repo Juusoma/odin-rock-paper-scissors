@@ -8,6 +8,8 @@
             body{
                 background-color: darkslateblue;
                 color: white;
+                user-select: none;
+                margin: 0;
             }
 
             .game-container{
@@ -19,22 +21,41 @@
                 gap: 32px;
             }
 
-            #player-buttons{
+            #plahumanyer-buttons{
                 display: flex;
                 flex-direction: row;
+            }
+            
+            .game-end-screen{
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                gap: 32px;
             }
         </style>
     </head>
     <body>
         <div class="game-container">
-            <div id="player-buttons">
+            <div id="human-buttons">
                 <button id="button-rock">Rock</button>
                 <button id="button-paper">Paper</button>
                 <button id="button-scissors">Scissors</button>
             </div>
+            <div>
+                You: <span class="text-human-score">5</span>
+            </div>
             <div id="text-round">
                 You lost
             </div>
+            <div>
+                PC: <span class="text-computer-score">3</span>
+            </div>
+        </div>
+        <div class="game-end-screen">
+            Game ended
+            <span class="game-end-screen-info">someone won</span>
         </div>
     </body>
 </html>

@@ -50,37 +50,69 @@ function playRound(humanChoice, computerChoice){
 }
 
 
-function onToolSelect(e){
-    let humanChoice;
-    switch(e.target.id){
-        case "button-rock":
-            humanChoice = "rock";
-            break;
-        case "button-paper":
-            humanChoice = "paper";
-            break;
-        case "button-scissors":
-            humanChoice = "scissors";
-            break;
-    }
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
+    const textHumanScore = document.querySelector(".text-human-score");
+    const textComputerScore = document.querySelector(".text-computer-score");
+    textHumanScore.textContent = 0;
+    textComputerScore.textContent = 0;
 
-    const computerChoice = getComputerChoice();
-    const roundResult = playRound(humanChoice, computerChoice);
-    let roundString = "";
-    if(roundResult === 0){
-        roundString = "Draw!";
+    function onToolSelect(e){
+        let humanChoice;
+        switch(e.target.id){
+            case "button-rock":
+                humanChoice = "rock";
+                break;
+            case "button-paper":
+                humanChoice = "paper";
+                break;
+            case "button-scissors":
+                humanChoice = "scissors";
+                break;
+        }
+    
+        const computerChoice = getComputerChoice();
+        const roundResult = playRound(humanChoice, computerChoice);
+        let roundString = "";
+        if(roundResult === 0){
+            roundString = "Draw!";
+        }
+        else if(roundResult === -1){
+            roundString = `You Lose! ${computerChoice} beats ${humanChoice}!`;
+            computerScore++;
+        }
+        else if(roundResult === 1){
+            roundString = `You Win! ${humanChoice} beats ${computerChoice}!`;
+            humanScore++;
+        }
+        textHumanScore.textContent = humanScore;
+        textComputerScore.textContent = computerScore;
+        textRound.textContent = roundString;
+
+        if(humanScore === 5){
+            endGame(true);
+        }
+        else if(computerScore === 5){
+            endGame(false);
+        }
     }
-    else if(roundResult === -1){
-        roundString = `You Lose! ${computerChoice} beats ${humanChoice}!`;
-    }
-    else if(roundResult === 1){
-        roundString = `You Win! ${humanChoice} beats ${computerChoice}!`;
-    }
-    textRound.textContent = roundString;
+    
+    const textRound = document.querySelector("#text-round");
+    const humanButtons = document.querySelectorAll("#human-buttons > button");
+    humanButtons.forEach((button) => {
+        button.addEventListener("click", onToolSelect);
+    });
 }
 
-const textRound = document.querySelector("#text-round");
-const playerButtons = document.querySelectorAll("#player-buttons > button");
-playerButtons.forEach((button) => {
-    button.addEventListener("click", onToolSelect);
-});
+function endGame(playerWon){
+    const gameScreen = document.querySelector(".game-container");
+    const endScreen = document.querySelector(".game-end-screen");
+    gameScreen.style.display = "none";
+    endScreen.style.display = "flex";
+
+    const endScreenInfo = document.querySelector(".game-end-screen-info");
+    endScreenInfo.textContent = playerWon ? "You won!" : "You lost!";
+}
+
+playGame();
