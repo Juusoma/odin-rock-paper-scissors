@@ -43,6 +43,24 @@ function playGame(){
     textHumanScore.textContent = 0;
     textComputerScore.textContent = 0;
 
+    function displayResult(humanChoice, computerChoice, roundResult){
+        let resultString = "";
+        if(roundResult === 0){
+            resultString = "Draw!";
+        }
+        else if(roundResult === -1){
+            resultString = `You Lose! ${computerChoice} beats ${humanChoice}!`;
+            computerScore++;
+        }
+        else if(roundResult === 1){
+            resultString = `You Win! ${humanChoice} beats ${computerChoice}!`;
+            humanScore++;
+        }
+        textHumanScore.textContent = humanScore;
+        textComputerScore.textContent = computerScore;
+        textRound.textContent = resultString;
+    }
+
     function onToolSelect(e){
         let humanChoice;
         switch(e.target.id){
@@ -59,21 +77,7 @@ function playGame(){
     
         const computerChoice = getComputerChoice();
         const roundResult = playRound(humanChoice, computerChoice);
-        let roundString = "";
-        if(roundResult === 0){
-            roundString = "Draw!";
-        }
-        else if(roundResult === -1){
-            roundString = `You Lose! ${computerChoice} beats ${humanChoice}!`;
-            computerScore++;
-        }
-        else if(roundResult === 1){
-            roundString = `You Win! ${humanChoice} beats ${computerChoice}!`;
-            humanScore++;
-        }
-        textHumanScore.textContent = humanScore;
-        textComputerScore.textContent = computerScore;
-        textRound.textContent = roundString;
+        displayResult(humanChoice, computerChoice, roundResult);
 
         if(humanScore === 5){
             endGame(true);
